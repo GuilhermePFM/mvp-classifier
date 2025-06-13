@@ -24,6 +24,19 @@ def remove_class_with_few_samples(complete_dataset: pd.DataFrame, min_samples: i
 
     return complete_dataset 
 
+def treat_text(complete_dataset: pd.DataFrame) -> pd.DataFrame:
+    """
+    Treat the text in the dataset.
+    Args:
+        complete_dataset (pd.DataFrame): The dataset to be treated.
+    Returns:
+        complete_dataset (pd.DataFrame): Dataset with treated text
+    """
+    # treat text
+    complete_dataset['Descrição'] = complete_dataset['Descrição'].str.lower()
+    complete_dataset['Descrição'] = complete_dataset['Descrição'].fillna("")
+
+    return complete_dataset
 
 def treat_dataset(complete_dataset: pd.DataFrame):
     """
@@ -33,8 +46,8 @@ def treat_dataset(complete_dataset: pd.DataFrame):
     Returns:
         complete_dataset (pd.DataFrame): Dataset treated
     """
-    # Load the dataset
-    complete_dataset['Descrição'] = complete_dataset['Descrição'].str.lower()
+    # treat text
+    complete_dataset = treat_text(complete_dataset)
 
     # for the classification models, the number of samples for each class must be greater than 2
     complete_dataset = remove_class_with_few_samples(complete_dataset, min_samples = 5)
