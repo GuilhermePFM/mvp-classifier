@@ -13,7 +13,7 @@ from sklearn.compose import TransformedTargetRegressor
 from feature_engineering import add_keyword_hints, add_date_features
 from sklearn.pipeline import FeatureUnion
 
-VERBOSE = True
+VERBOSE = False
 
 
 def description_transformer():
@@ -21,7 +21,6 @@ def description_transformer():
         FunctionTransformer(tokenized_pytorch_tensors, kw_args={"column_list": ["input_ids", "attention_mask"]}),
         FunctionTransformer(hidden_state_from_text_inputs),
         verbose=VERBOSE
-        
     )
 
 

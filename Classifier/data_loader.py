@@ -49,6 +49,9 @@ def treat_dataset(complete_dataset: pd.DataFrame):
     # treat text
     complete_dataset = treat_text(complete_dataset)
 
+    # remove ID', 'Data', 'conta', 'Descrição', 'Valor', 'origem'
+    complete_dataset.drop(columns=['conta', 'ID', 'origem'], inplace=True, axis=1)
+    
     # for the classification models, the number of samples for each class must be greater than 2
     complete_dataset = remove_class_with_few_samples(complete_dataset, min_samples = 5)
 
