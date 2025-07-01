@@ -1,9 +1,9 @@
 from datasets import Dataset
 from transformers import AutoTokenizer
+from transformers import AutoModel
+import torch
 import pandas as pd
 from feature_engineering import TEXT_FEATURES
-import torch
-from transformers import AutoModel
 
 
 MODEL_NAME = "distilbert-base-uncased"
@@ -36,7 +36,7 @@ def tokenized_pytorch_tensors(
     tokenized_dataset = transformers_dataset.map(
         tokenize,
         batched=True,
-        batch_size=128
+        batch_size=128,
     )
 
     tokenized_dataset.set_format(

@@ -19,10 +19,3 @@ def add_date_features(complete_dataset):
     complete_dataset['month'] = complete_dataset['Data'].dt.month
     complete_dataset.drop('Data', inplace=True, axis=1)
     return complete_dataset
-
-
-# def create_new_features(complete_dataset):
-#     complete_dataset = add_keyword_hints(complete_dataset=complete_dataset)
-#     complete_dataset = add_date_features(complete_dataset=complete_dataset)
-#     complete_dataset = complete_dataset[ALL_FEATURES + TARGET_VARIABLE]
-#     return complete_dataset

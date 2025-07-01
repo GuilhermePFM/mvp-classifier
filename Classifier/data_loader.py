@@ -2,7 +2,8 @@ from pathlib import Path
 import pandas as pd
 from feature_engineering import TARGET_VARIABLE
 
-DATASET_NAME = 'database_classified.parquet'
+# DATASET_NAME = 'database_classified.parquet'
+DATASET_NAME = 'treated_database.parquet'
 
 
 def remove_class_with_few_samples(complete_dataset: pd.DataFrame, min_samples: int) -> pd.DataFrame:
@@ -50,7 +51,10 @@ def treat_dataset(complete_dataset: pd.DataFrame):
     complete_dataset = treat_text(complete_dataset)
 
     # remove ID', 'Data', 'conta', 'Descrição', 'Valor', 'origem'
-    complete_dataset.drop(columns=['conta', 'ID', 'origem'], inplace=True, axis=1)
+    try:
+        complete_dataset.drop(columns=['conta', 'ID', 'origem'], inplace=True, axis=1)
+    except:
+        pass
     
     # for the classification models, the number of samples for each class must be greater than 2
     complete_dataset = remove_class_with_few_samples(complete_dataset, min_samples = 5)
