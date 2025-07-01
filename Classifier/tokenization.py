@@ -50,7 +50,7 @@ def tokenized_pytorch_tensors(
 
     return tokenized_dataset
 
-
+import numpy as np
 def hidden_state_from_text_inputs(df) -> pd.DataFrame:
 
     def extract_hidden_states(batch):
@@ -68,7 +68,7 @@ def hidden_state_from_text_inputs(df) -> pd.DataFrame:
             last_hidden_state = model(**inputs).last_hidden_state
             # get the CLS token, which is the first one
             # [:, 0] gives us a row for each batch with the first column of 768 for each
-            return {"cls_hidden_state": last_hidden_state[:, 0].cpu().numpy()}
+            return {"cls_hidden_state": np.asarray(last_hidden_state[:, 0].cpu().numpy())}
 
     cls_dataset = df.map(extract_hidden_states, batched=True, batch_size=128)
     cls_dataset.set_format(type="pandas")
