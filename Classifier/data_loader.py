@@ -3,7 +3,7 @@ import pandas as pd
 from feature_engineering import TARGET_VARIABLE
 
 # DATASET_NAME = 'database_classified.parquet'
-DATASET_NAME = 'treated_database.parquet'
+DATASET_NAME = 'enc_treated_database.parquet'
 
 
 def remove_class_with_few_samples(complete_dataset: pd.DataFrame, min_samples: int) -> pd.DataFrame:
