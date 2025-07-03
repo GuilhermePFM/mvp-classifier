@@ -9,3 +9,4 @@
 *.ofx
 *.1
 Classifier/joblib/*
+*.key
